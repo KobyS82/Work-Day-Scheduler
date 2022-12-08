@@ -23,7 +23,7 @@ $(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
   $('.saveBtn').click(function(event) {
-    var parent = $(this).parent().attr("id");
+    var parent = $(this).parent().attr('id');
     var textArea = $(this).siblings('.description').val();
     localStorage.setItem(parent, textArea);
   });
@@ -38,32 +38,44 @@ $(function () {
   // Tests and manipulates variables depending on the time of day
   console.log(hourVal, amOrPm);
   hourVal = 1;
+  
+  
   var valTime = parseInt(hourVal);
   console.log(valTime);
   if (amOrPm === 'PM'){
     valTime+=10;
   }
   console.log(valTime);
-  
+  $('#upBtn').click(function(event){
+    valTime+=1;
+    console.log(valTime);
+  });
+  $('#date-time').text(valTime);
   // Changes color of boxes to represent past, current, and future with class name changes
   function rightTime(){
     // Repeats for each hr block
-    $(".time-block").each(function () {
-      var timeID = parseInt($(this).attr("id").split("hour-")[1]);
+    $('.time-block').each(function () {
+      var timeID = parseInt($(this).attr('id').split('hour-')[1]);
       
       // Changes class to present if the actual time matches the timeID
       if (timeID === valTime){
         $(this).addClass('present')
+        $(this).removeClass('past');
+        $(this).removeClass('future');
       }
 
       // Changes class to future if the actual time is higher than the timeID
       if (timeID > valTime){
         $(this).addClass('future')
+        $(this).removeClass('present');
+        $(this).removeClass('past');
       }
 
       // Changes class to past if the actual time is less than the timeID
       if (timeID < valTime){
         $(this).addClass('past')
+        $(this).removeClass('future');
+        $(this).removeClass('present');
       }
 
    })
