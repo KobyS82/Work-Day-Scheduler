@@ -10,7 +10,7 @@ $(function () {
   var weekDay = now.format('dddd');
   var currentDay = now.format('MMMM D, YYYY');
   var theTime = now.format('hh:mm a');
-  var timeVal = now.format('h');
+  var hourVal = now.format('h');
   var amOrPm = now.format('A');
 
   $('#weekDay').text(weekDay);
@@ -28,22 +28,54 @@ $(function () {
     localStorage.setItem(parent, textArea);
   });
 
-  //
+  
   // TODO: Add code to apply the past, present, or future class to each time
   // block by comparing the id to the current hour. HINTS: How can the id
   // attribute of each time-block be used to conditionally add or remove the
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
 
-  console.log(timeVal, amOrPm);
-  function rightTime(){
-   
-   }
+  // Tests and manipulates variables depending on the time of day
+  console.log(hourVal, amOrPm);
+  hourVal = 1;
+  var valTime = parseInt(hourVal);
+  console.log(valTime);
+  if (amOrPm === 'PM'){
+    valTime+=10;
   }
+  console.log(valTime);
+  
+  // Changes color of boxes to represent past, current, and future with class name changes
+  function rightTime(){
+    // Repeats for each hr block
+    $(".time-block").each(function () {
+      var timeID = parseInt($(this).attr("id").split("hour-")[1]);
+      
+      // Changes class to present if the actual time matches the timeID
+      if (timeID === valTime){
+        $(this).addClass('present')
+      }
+
+      // Changes class to future if the actual time is higher than the timeID
+      if (timeID > valTime){
+        $(this).addClass('future')
+      }
+
+      // Changes class to past if the actual time is less than the timeID
+      if (timeID < valTime){
+        $(this).addClass('past')
+      }
+
+   })
+   
+  };
   //
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   //
   // TODO: Add code to display the current date in the header of the page.
+
+
+  rightTime();
 });
