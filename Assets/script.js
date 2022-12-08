@@ -49,6 +49,7 @@ $(function () {
   $('#upBtn').click(function(event){
     valTime+=1;
     console.log(valTime);
+    rightTime()
   });
   $('#date-time').text(valTime);
   // Changes color of boxes to represent past, current, and future with class name changes
