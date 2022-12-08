@@ -1,10 +1,6 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
-// $('p').click(function(){
-//   this.innerHTML='Maybe';
-// });
-// $('#tester').hide();
 $(function () {
   var now = dayjs();
   var weekDay = now.format('dddd');
@@ -13,9 +9,6 @@ $(function () {
   var hourVal = now.format('h');
   var amOrPm = now.format('A');
 
-  $('#weekDay').text(weekDay);
-  $('#currentDay').text(currentDay);
-  $('#currentTime').text(theTime);
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -37,15 +30,15 @@ $(function () {
 
   // Tests and manipulates variables depending on the time of day
   console.log(hourVal, amOrPm);
+  // DELETE LATER vvv
   hourVal = 1;
-  
-  
+
   var valTime = parseInt(hourVal);
-  console.log(valTime);
   if (amOrPm === 'PM'){
     valTime+=10;
   }
-  console.log(valTime);
+  // Changes the time up
+  // DELETE LATER
   $('#upBtn').click(function(event){
     valTime+=1;
     console.log(valTime);
@@ -82,13 +75,20 @@ $(function () {
    })
    
   };
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
+ 
+  function rightText(){
+    // Repeats for each text block
+    $('.description').each(function () {
+      var parent = $(this).parent().attr('id');
+      $(this).text(localStorage.getItem(parent))
+    })
+  };
 
+  // Adds
+  $('#weekDay').text(weekDay);
+  $('#currentDay').text(currentDay);
+  $('#currentTime').text(theTime);
 
   rightTime();
+  rightText()
 });
