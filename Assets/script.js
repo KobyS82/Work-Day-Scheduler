@@ -1,11 +1,21 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
-$('p').click(function(){
-  this.innerHTML='Maybe';
-});
+// $('p').click(function(){
+//   this.innerHTML='Maybe';
+// });
 // $('#tester').hide();
 $(function () {
+  var now = dayjs();
+  var weekDay = now.format('dddd');
+  var currentDay = now.format('MMMM D, YYYY');
+  var theTime = now.format('hh:mm a');
+  var timeVal = now.format('h');
+  var amOrPm = now.format('A');
+
+  $('#weekDay').text(weekDay);
+  $('#currentDay').text(currentDay);
+  $('#currentTime').text(theTime);
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -15,8 +25,6 @@ $(function () {
   $('.saveBtn').click(function(event) {
     var parent = $(this).parent().attr("id");
     var textArea = $(this).siblings('.description').val();
-    console.log(parent);
-    console.log(textArea);
     localStorage.setItem(parent, textArea);
   });
 
@@ -26,6 +34,12 @@ $(function () {
   // attribute of each time-block be used to conditionally add or remove the
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
+
+  console.log(timeVal, amOrPm);
+  function rightTime(){
+   
+   }
+  }
   //
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
